@@ -1,0 +1,16 @@
+.alert-success{
+
+  background-color: green;
+
+}
+
+.alert {
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: medium;
+  color: white;
+}
+
+.alert-danger{
+  background-color: red;
+
+}

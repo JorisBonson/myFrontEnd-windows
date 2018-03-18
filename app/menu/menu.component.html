@@ -1,0 +1,80 @@
+
+<header class="bar">
+<img src="../../assets/flimlogo2.png" />
+
+
+<br/>
+
+<mat-toolbar color="primary" style="width: 100%">
+
+<mat-toolbar-row>
+    <button mat-button  [routerLink]="['']" routerLinkActive="active">Home </button>
+    <button mat-button [mat-menu-trigger-for]="aboutMenu" >About <i class="material-icons">&#xE5C5;</i> </button>
+
+
+    <button mat-button style="alignment: right" [routerLink]="['/register']" routerLinkActive="active" >Register</button>
+
+
+
+
+    <button  mat-button style="alignment: right"   [routerLink]="['/login']" routerLinkActive="active"  >Log In
+    </button>
+
+
+<div *ngIf="LoggedIn">
+
+    <button *ngIf="currentUser.role == 'creator' || currentUser.role == 'editor' " mat-button [mat-menu-trigger-for]="createMenu">
+      Create
+      <i class="material-icons">&#xE5C5;</i>
+    </button>
+    <button mat-button [mat-menu-trigger-for]="userMenu">
+      {{ currentUser.email }}
+      <i class="material-icons">&#xE5C5;</i>
+    </button>
+
+    <button  *ngIf= " currentUser.role == 'editor' "  mat-button [mat-menu-trigger-for]="addMenu">
+      Administration <i class="material-icons">&#xE5C5;</i>
+    </button>
+  <button  mat-button style="alignment: right"   [routerLink]="['/logout']" >Log Out
+  </button>
+  </div>
+
+
+
+
+
+</mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <mat-menu #aboutMenu="matMenu" mat-offset="0 2" color="primary">
+    <button mat-menu-item  [routerLink]="['/wheretofindus']" routerLinkActive="active" > Where to find us</button>
+    <button mat-menu-item  [routerLink]="['/aboutus']" routerLinkActive="active" >About us</button>
+    <button mat-menu-item  [routerLink]="['/contactus']" routerLinkActive="active" >Contact us</button>
+  </mat-menu>
+
+  <mat-menu xPosition="after" #userMenu="matMenu" mat-offset="0 2">
+    <button mat-menu-item [routerLink]="['/myprofile']" routerLinkActive="active">Edit Profile </button>
+    <button *ngIf=" currentUser.role ==='editor'||currentUser.role ==='writer' "
+            mat-menu-item [routerLink]="['/myreviews']" routerLinkActive="active">My Reviews</button>
+    <!-- <button mat-menu-item [routerLink]="/dashboard" routerLinkActive="active">Dashboard</button>-->
+    <button mat-menu-item   [routerLink]="['/logout']" routerLinkActive="active" >Log Out</button>
+  </mat-menu>
+
+  <mat-menu #createMenu="matMenu" mat-offset="0 2">
+    <button mat-menu-item  [routerLink]="['/createreview']" routerLinkActive="active">Add New Review</button>
+    <button mat-menu-item  [routerLink]="['/editreview']" routerLinkActive="active">Edit Reviews</button>
+  </mat-menu>
+
+  <mat-menu #addMenu="matMenu" mat-offset="0 2">
+    <button mat-menu-item *ngIf="currentUser.role == 'editor' " [routerLink]="['/admindashboard']"
+            routerLinkActive="active">Admin Dashboard</button>
+    <button mat-menu-item *ngIf="currentUser.role == 'editor' " [routerLink]="['/createadmin']"
+            routerLinkActive="active">Create Admin</button>
+    <button mat-menu-item *ngIf="currentUser.role == 'editor' " [routerLink]="['/usermanager']"
+            routerLinkActive="active">User Management</button>
+  </mat-menu>
+
+
+
+</header>
